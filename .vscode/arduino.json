@@ -1,0 +1,8 @@
+{
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "output": "../build",
+    "sketch": "arduinowork\\arduinowork.ino",
+    "port": "COM7",
+    "programmer": "avrisp"
+}
