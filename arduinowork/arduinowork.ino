@@ -5,7 +5,12 @@ void setup(){
 }
 
 void loop(){
-    Serial.println("Hello");
+    if (Serial.available() > 0){
+        String input = Serial.readString();
+        Serial.print("Recieved Value: ");
+        Serial.println(input);
+        int ival = input.toInt();
+    }
 }
 
 void vibration_fb(double distance, double speed){
