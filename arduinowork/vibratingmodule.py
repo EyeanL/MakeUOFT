@@ -20,14 +20,20 @@ def estimate_distance(pixel_width):
     """Estimates the distance to an object based on its apparent size in the image."""
     return (FACE_WIDTH * FOCAL_LENGTH) / pixel_width
 
-def trigger_condition(position, velocity):
-    if 
+def trigger_condition(distance, velocity):
+    if distance < 5 and velocity > 0.5:
+        return True
+    else: return False
 
-def calc_vibration(threshold, distance):
-    if distance > threshold:
+def calc_vibration(distance, velocity):
+    if trigger_condition(distance, velocity):
         return 1 - np.tanh(distance)
     else:
         return 0
+
+def light_feedback(distance, velocity, vech_type):
+    
+    pass
 
 # Initialize variables for velocity calculation
 previous_distance = None
