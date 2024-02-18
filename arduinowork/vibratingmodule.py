@@ -44,39 +44,43 @@ def calc_vibration(distance, velocity):
     else:
         return 0
 
-# def light_feedback(distance, velocity, distance_from_center, obj_ratio, vech_type):
-#     if vech_type == "motorcycle":
-#         color = Color(255, 0, 0)
-#     elif vech_type == "truck":
-#         color = Color(0, 255, 0)
-#     else:
-#         color = Color(0, 0, 255)
-#     dlight_norm = distance_from_center % 35
-#     obj_light = (int)(obj_ratio * 70)
-#     start_obj = dlight_norm - obj_light/2
-#     end_obj = dlight_norm + obj_light
-#     for i in range(start_obj, end_obj):
-#         strip.setPixelColor(i, color)
-#         strip.show()
-#         time.sleep(wait_ms/1000.0)
+def light_feedback(distance, velocity, distance_from_center, obj_ratio, vech_type):
+    if vech_type == "motorcycle":
+        color = Color(255, 0, 0)
+    elif vech_type == "truck":
+        color = Color(0, 255, 0)
+    else:
+        color = Color(0, 0, 255)
+    dlight_norm = distance_from_center % 35
+    obj_light = (int)(obj_ratio * 70)
+    start_obj = dlight_norm - obj_light/2
+    end_obj = dlight_norm + obj_light
+
+    if trigger_condition(distance, velocity):
+        
+
+    for i in range(start_obj, end_obj):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(wait_ms/1000.0)
 
 # Initialize variables for velocity calculation
 previous_distance = None
 previous_time = None
 
 # Process arguments
-# parser = argparse.ArgumentParser()
-# parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
-# args = parser.parse_args()
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', '--clear', action='store_true', help='clear the display on exit')
+args = parser.parse_args()
 
-# # Create NeoPixel object with appropriate configuration.
-# strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-# # Intialize the library (must be called once before other functions).
-# strip.begin()
+# Create NeoPixel object with appropriate configuration.
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+# Intialize the library (must be called once before other functions).
+strip.begin()
 
-# print ('Press Ctrl-C to quit.')
-# if not args.clear:
-#     print('Use "-c" argument to clear LEDs on exit')
+print ('Press Ctrl-C to quit.')
+if not args.clear:
+    print('Use "-c" argument to clear LEDs on exit')
 
 # Initialize the webcam
 cap = cv2.VideoCapture(0)
