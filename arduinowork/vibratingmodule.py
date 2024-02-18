@@ -20,7 +20,7 @@ LED_DMA        = 10      # DMA channel to use for generating a signal (try 10)
 LED_BRIGHTNESS = 65      # Set to 0 for darkest and 255 for brightest
 LED_INVERT     = False   # True to invert the signal (when using NPN transistor level shift)
 LED_CHANNEL    = 0       # set to '1' for GPIOs 13, 19, 41, 45 or 53
-wait_ms = 50
+wait_ms = 500
 
 # Constants for distance calculation
 FACE_WIDTH = 0.16  # meters
@@ -57,12 +57,14 @@ def light_feedback(distance, velocity, distance_from_center, obj_ratio, vech_typ
     end_obj = dlight_norm + obj_light
 
     if trigger_condition(distance, velocity):
-        
+        wait_ms = 50
 
     for i in range(start_obj, end_obj):
         strip.setPixelColor(i, color)
         strip.show()
         time.sleep(wait_ms/1000.0)
+
+    wait_ms = 100
 
 # Initialize variables for velocity calculation
 previous_distance = None
@@ -104,7 +106,7 @@ while True:
             distance_diff = previous_distance - current_distance
             velocity = distance_diff / time_diff  # m/s
             cv2.putText(frame, f"{velocity:.2f} m/s", (x, y+h+20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
-            # Print how far off the center the face is
+            # Print how far off the center the face is  
             center_x = frame.shape[1] / 2
             # 960 pixels in this case
             face_center_x = x + w / 2
@@ -118,6 +120,8 @@ while True:
 
         v_motor.value = calc_vibration(previous_distance)
         obj_ratio = largest_face.shape[2]/frame.shape[2]
+
+        light_feedback(previous_distance, velocity, distance_from_center, obj_ratio, "motorcycle")
 
     # Display the resulting frame
     cv2.imshow('Detection, Distance, and velocity Estimation', frame)
