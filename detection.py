@@ -47,6 +47,7 @@ while True:
             cv2.putText(frame, f"{distance_from_center:.2f} pixels", (x, y+h+40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
         previous_distance = current_distance
         previous_time = current_time
+        
 
     # Display the resulting frame
     cv2.imshow('Detection, Distance, and Speed Estimation', frame)

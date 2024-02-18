@@ -13,7 +13,7 @@ void loop(){
 
         // Activate user
         vibration_fb(ival);
-        matrixled_fb(ival);
+        // matrixled_fb(ival);
     }
 }
 
@@ -24,7 +24,7 @@ void vibration_fb(double distance){
     delay((int)(1/distance));
 }
 
-void matrixled_fb(double distance){
+// void matrixled_fb(double distance){
 
-}
+// }
 
